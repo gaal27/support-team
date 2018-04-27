@@ -1,0 +1,66 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="param.css">
+   <meta charset="utf-8">
+</head>
+<body background="fondo4.png">
+
+<div id="cabecera">
+	<img src="adman2.png">
+</div>		
+<div id="formulario">	
+   <h1>Formato deseado:</h1><br />
+   <select name="formato" id="format">
+       <option value="intext" selected="selected">intext</option>
+       <option value="inbanner">inbanner</option>
+       <option value="prime">prime</option>
+       <option value="surf">surf</option>
+       Slot<input type="text" id="slot" placeholder="slots_selectors"></input><br>
+       <input type="text" id=tag placeholder="permalink paramset"></input>
+   </select>   
+   <button  onclick="format()">Generar ParamSets</button><br>
+   <p id="contenido"></p>
+   <p id="permalink_tag"></p>
+</div>   
+	<script type="text/javascript">
+       function format(event){
+
+           var f=document.getElementById("format").value;
+           var slot = document.getElementById("slot").value;
+           var perma = document.getElementById("tag").value;
+
+           if(f=="intext"){
+             if(slot){
+               document.getElementById("contenido").innerHTML='{"product": "Pi","format": "intext","slot":['+slot+']}'
+             }else{
+               document.getElementById("contenido").innerHTML='{"product": "Pi","format": "intext"}'
+             }
+           }
+           else if (f=="inbanner"){
+             if(slot){
+               document.getElementById("contenido").innerHTML='{"product": "Pb","format": "inbanner", "slot":['+slot+']}'
+             }else{
+               document.getElementById("contenido").innerHTML='{"product": "Pb","format": "inbanner"}'
+             }
+           }
+           else if (f=="surf"){
+             document.getElementById("contenido").innerHTML='{"product": "surf","format": "surf"}<br><br> {"product": "surfm","format": "surf"}'
+           }
+           else {
+             if(slot){
+               document.getElementById("contenido").innerHTML='{"format": "prime","product": "Pr_D", "slot":['+slot+']}<br><br> {"format": "prime","product": "Pr_M", "slot":['+slot+']}'
+             }else{
+               document.getElementById("contenido").innerHTML='{"format": "prime","product": "Pr_D"}<br><br> {"format": "prime","product": "Pr_M"}'
+             }
+           }
+           if(perma){
+          var script_tag = '<sc'+'ript src="https://mona.admanmedia.com/go?id='+perma+'" id="hybs-'+perma+'" async></scr'+'ipt>';
+          document.getElementById("permalink_tag").innerText = script_tag;
+        }
+           console.log(document.getElementById("format").value);
+       }
+       </script>
+</body>
+</html>
+
+
