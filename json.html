@@ -7,8 +7,8 @@
 
 <div id="cabecera">
 	<img src="adman2.png">
-</div>		
-<div id="formulario">	
+</div>
+<div id="formulario">
    <h1>Formato deseado:</h1><br />
    <select name="formato" id="format">
        <option value="intext" selected="selected">intext</option>
@@ -16,18 +16,23 @@
        <option value="prime">prime</option>
        <option value="surf">surf</option>
        Slot<input type="text" id="slot" placeholder="slots_selectors"></input><br>
+			 <select id="type-tag" name="Type-tag">
+			 	<option value="normal-tag" selected="selected">Tag normal</option>
+				<option value="one-tag" selected="selected">Tag único</option>
+			 </select>
        <input type="text" id=tag placeholder="permalink paramset"></input>
-   </select>   
+   </select>
    <button  onclick="format()">Generar ParamSets</button><br>
    <p id="contenido"></p>
    <p id="permalink_tag"></p>
-</div>   
+</div>
 	<script type="text/javascript">
        function format(event){
 
            var f=document.getElementById("format").value;
            var slot = document.getElementById("slot").value;
            var perma = document.getElementById("tag").value;
+					 var t = document.getElementById("type-tag").value;
 
            if(f=="intext"){
              if(slot){
@@ -54,13 +59,17 @@
              }
            }
            if(perma){
-          var script_tag = '<sc'+'ript src="https://mona.admanmedia.com/go?id='+perma+'" id="hybs-'+perma+'" async></scr'+'ipt>';
-          document.getElementById("permalink_tag").innerText = script_tag;
+
+						 if(t == "normal-tag"){
+          		var script_tag = '<sc'+'ript src="https://mona.admanmedia.com/go?id='+perma+'" id="hybs-'+perma+'" async></scr'+'ipt>';
+          		document.getElementById("permalink_tag").innerText = script_tag;
+						}else{
+							var script_tag = '<sc'+'ript src="https://mona.admanmedia.com/mgo?id='+perma+'" async></scr'+'ipt>';
+							document.getElementById("permalink_tag").innerText = script_tag;
+						}
         }
            console.log(document.getElementById("format").value);
        }
        </script>
 </body>
 </html>
-
-
